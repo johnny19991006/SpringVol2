@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.example.SpringVol2.mapper.UserMapper">
+    <select id="findUsers" resultType="java.util.List">
+        SELECT * FROM users
+    </select>
+
+    <select id="findUserByEmail" parameterType="java.lang.String" resultType="com.example.SpringVol2.domain.User">
+        SELECT * FROM users WHERE email = #{email}
+    </select>
+
+    <insert id="createUser" parameterType="com.example.SpringVol2.domain.User" resultType="com.example.SpringVol2.domain.User">
+        INSERT INTO users(email, userId, password) VALUES (#{email}, #{userId}, #{password})
+    </insert>
+
+    <update id="updateUser" parameterType="com.example.SpringVol2.domain.User" resultType="com.example.SpringVol2.domain.User">
+        UPDATE users SET userId=#{userId}, password=#{password} WHERE email=#{email}
+    </update>
+
+    <delete id="deleteUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+        DELETE FROM users WHERE email=#{email}
+    </delete>
+</mapper>
+
