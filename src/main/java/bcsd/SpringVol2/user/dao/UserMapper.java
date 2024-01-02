@@ -10,14 +10,14 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    @Insert("insert into users(username, userid, password) values(#{member.userName}, #{member.userId}, #{member.password))")
+    @Insert("insert into users(username, userid, password) values(#{userName}, #{userId}, #{password))")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(@Param("user") User user);
 
-    @Select("select * from member")
+    @Select("select * from users")
     List<User> findAllUsers();
 
-    @Select("select * from member where id=#{id}")
+    @Select("select * from users where id=#{id}")
     User findById(@Param("id")Long id);
 
     @Update("update users set username=#{username}, userid=#{userid}, password=#{password} where id=#{id}")
