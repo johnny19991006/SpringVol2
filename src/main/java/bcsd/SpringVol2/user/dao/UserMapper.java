@@ -1,0 +1,28 @@
+package bcsd.SpringVol2.user.dao;
+
+import bcsd.SpringVol2.user.dto.User;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Mapper
+@Repository
+public interface UserMapper {
+
+    @Insert("insert into users(username, userid, password) values(#{member.userName}, #{member.userId}, #{member.password))")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void insertUser(@Param("user") User user);
+
+    @Select("select * from member")
+    List<User> findAllUsers();
+
+    @Select("select * from member where id=#{id}")
+    User findById(@Param("id")Long id);
+
+    @Update("update users set username=#{username}, userid=#{userid}, password=#{password} where id=#{id}")
+    void updateUserInfo(User user);
+
+    @Delete("delete from users where id=#{id}")
+    void deleteUser(Long id);
+}
