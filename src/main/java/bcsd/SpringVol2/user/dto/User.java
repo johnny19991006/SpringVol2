@@ -10,13 +10,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
     private Long id;
-    private String userName; //유저 닉네임
-    private String userId; //유저 아이디
+    private String username; //유저 닉네임
+    private String userid; //유저 아이디
     private String password; //유저 비밀번호
 
-    public User(String userName, String userId, String password) {
-        this.userName = userName;
-        this.userId = userId;
+    public User(String username, String userid, String password) {
+        this.username = username;
+        this.userid = userid;
         this.password = password;
     }
 }

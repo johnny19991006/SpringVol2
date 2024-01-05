@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping("/test")
-    public String memberTest(){
+    public String userTest(){
         User userA = new User("홍길동", "kk1234", "aa3333");
         User userB = new User("김철수", "jj1234", "bb3333");
 
@@ -28,8 +28,9 @@ public class UserController {
 
         User userC = userService.findById(userA.getId());
         User userD = userService.findById(userB.getId());
-        System.out.println(userC);
-        System.out.println(userD);
+
+        System.out.println(userC.getId() + userC.getUsername() + userC.getUserid() + userC.getPassword());
+        System.out.println(userD.getId() + userD.getUsername() + userD.getUserid() + userD.getPassword());
 
         return "Ok";
     }

@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
 
-    private final UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Autowired
     public UserServiceImpl(UserMapper userMapper) {
