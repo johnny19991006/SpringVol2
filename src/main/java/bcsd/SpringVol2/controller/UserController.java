@@ -51,17 +51,19 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateUserName(@PathVariable(name = "id") Long id,
+    public ResponseEntity updateUserName(@PathVariable(name = "id") Long id,
                                @RequestHeader(name = "token") String token,
                                @RequestBody User user){
         try {
             if (jwtUtils.isValidToken(token)) {
                 userService.updateUserInfo(id, user);
+                return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 throw new IllegalArgumentException();
             }
         } catch (Exception e){
             log.error("update user token error id : {}", id);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -76,7 +78,7 @@ public class UserController {
             }
         } catch (Exception e){
             log.error("delete user token error id : {}", id);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
     }
@@ -92,7 +94,7 @@ public class UserController {
             headers.set("token", token);
             return new ResponseEntity<>(headers, HttpStatus.OK);
         } else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 }
