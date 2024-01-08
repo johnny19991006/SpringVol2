@@ -1,5 +1,6 @@
 package bcsd.SpringVol2.service;
 
+import bcsd.SpringVol2.domain.dto.LoginRequest;
 import bcsd.SpringVol2.domain.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,6 @@ public interface UserService {
     void updateUserInfo(Long id, User newUser);
 
     void deleteUser(Long id);
+
+    User login(LoginRequest loginRequest);
 }
