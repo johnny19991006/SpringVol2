@@ -1,6 +1,6 @@
 package bcsd.SpringVol2.repository;
 
-import org.apache.catalina.User;
+import bcsd.SpringVol2.domain.entity.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
