@@ -48,13 +48,35 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void updateUserName(@PathVariable(name = "id") Long id, @RequestBody User user){
-        userService.updateUserInfo(id, user);
+    public ResponseEntity updateUser(@PathVariable(name = "id") Long id,
+                                         @RequestHeader(name = "token") String token,
+                                         @RequestBody User user){
+        try {
+            if (jwtUtils.isValidToken(token)) {
+                userService.updateUserInfo(id, user);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        } catch (Exception e){
+            log.error("update user token error id : {}", id);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable(name = "id") Long id){
-        userService.deleteUser(id);
+    public ResponseEntity deleteUser(@PathVariable(name = "id") Long id, @RequestHeader("token") String token){
+        try {
+            if (jwtUtils.isValidToken(token)) {
+                userService.deleteUser(id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        } catch (Exception e){
+            log.error("delete user token error id : {}", id);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping("/login")
